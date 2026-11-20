@@ -1,0 +1,128 @@
+name: Build unsigned IPA
+
+# Manual-only: builds vreader as an UNSIGNED .ipa so it can be signed later with
+# Sideloadly / AltStore / a personal Apple ID. No certificates or provisioning
+# profiles are needed because code signing is explicitly disabled.
+
+on:
+  workflow_dispatch:
+    inputs:
+      configuration:
+        description: "Build configuration"
+        type: choice
+        options:
+          - Release
+          - Debug
+        default: Release
+
+permissions:
+  contents: read
+
+jobs:
+  build-ipa:
+    name: Archive + package IPA
+    runs-on: macos-15
+    timeout-minutes: 120
+
+    env:
+      SCHEME: vreader
+      PROJECT: vreader.xcodeproj
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Select Xcode and report toolchain
+        run: |
+          set -euo pipefail
+          echo "== installed Xcodes =="
+          ls -1 /Applications | grep -i '^Xcode' || true
+          XC="$(ls -d /Applications/Xcode_16*.app 2>/dev/null | sort -V | tail -1 || true)"
+          if [ -n "${XC}" ]; then
+            echo "Selecting ${XC}"
+            sudo xcode-select -s "${XC}"
+          fi
+          echo "== active toolchain =="
+          xcode-select -p
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+
+      - name: Resolve Swift package dependencies
+        run: |
+          set -euo pipefail
+          xcodebuild -resolvePackageDependencies \
+            -project "${PROJECT}" \
+            -scheme "${SCHEME}"
+
+      - name: Archive (code signing disabled)
+        run: |
+          set -euo pipefail
+          OUT="${RUNNER_TEMP}/out"
+          mkdir -p "${OUT}"
+          xcodebuild archive \
+            -project "${PROJECT}" \
+            -scheme "${SCHEME}" \
+            -configuration "${{ inputs.configuration }}" \
+            -destination 'generic/platform=iOS' \
+            -archivePath "${OUT}/vreader.xcarchive" \
+            -skipMacroValidation \
+            -skipPackagePluginValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            DEVELOPMENT_TEAM="" \
+            ENABLE_USER_SCRIPT_SANDBOXING=NO \
+            2>&1 | tee "${OUT}/xcodebuild-archive.log"
+
+      - name: Package Payload into .ipa
+        run: |
+          set -euo pipefail
+          OUT="${RUNNER_TEMP}/out"
+          APP="${OUT}/vreader.xcarchive/Products/Applications/vreader.app"
+          if [ ! -d "${APP}" ]; then
+            echo "::error::built app not found at ${APP}"
+            ls -R "${OUT}/vreader.xcarchive/Products" || true
+            exit 1
+          fi
+
+          cd "${OUT}"
+          rm -rf Payload
+          mkdir -p Payload
+          cp -R "${APP}" Payload/
+
+          IPA="vreader-${{ inputs.configuration }}-unsigned.ipa"
+          zip -qry "${IPA}" Payload
+
+          echo "== ipa =="
+          ls -lh "${IPA}"
+          echo "sha256=$(sha256sum "${IPA}" | cut -d' ' -f1)" | tee ipa-sha256.txt
+
+          echo "== bundle identity =="
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" Payload/vreader.app/Info.plist
+          /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" Payload/vreader.app/Info.plist
+          /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" Payload/vreader.app/Info.plist
+          /usr/libexec/PlistBuddy -c "Print :MinimumOSVersion" Payload/vreader.app/Info.plist
+
+          echo "== signature state (expected: not signed) =="
+          codesign -dv Payload/vreader.app 2>&1 || true
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: vreader-ipa
+          path: |
+            ${{ runner.temp }}/out/*.ipa
+            ${{ runner.temp }}/out/ipa-sha256.txt
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: ${{ runner.temp }}/out/xcodebuild-archive.log
+          if-no-files-found: ignore
+          retention-days: 7
