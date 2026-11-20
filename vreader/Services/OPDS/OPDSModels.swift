@@ -195,7 +195,7 @@ enum OPDSParserError: Error, Sendable, Equatable, LocalizedError {
         case .invalidXML(let detail):
             return "Failed to parse OPDS feed: \(detail)"
         case .emptyData:
-            return "The server returned an empty response."
+            return String(localized: "The server returned an empty response.")
         case .networkError(let detail):
             return "Network error: \(detail)"
         case .httpError(let code):

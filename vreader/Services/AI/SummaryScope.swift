@@ -32,9 +32,9 @@ enum SummaryScope: String, CaseIterable, Sendable, Equatable {
     /// in `vreader-panels.jsx` exactly.
     var displayName: String {
         switch self {
-        case .section:   return "Section"
-        case .chapter:   return "Chapter"
-        case .bookSoFar: return "Book so far"
+        case .section:   return String(localized: "Section")
+        case .chapter:   return String(localized: "Chapter")
+        case .bookSoFar: return String(localized: "Book so far")
         }
     }
 }

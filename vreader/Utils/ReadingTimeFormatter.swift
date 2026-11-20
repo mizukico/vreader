@@ -207,7 +207,7 @@ enum ReadingTimeFormatter {
         relativeTo now: Date = Date()
     ) -> String {
         let elapsed = now.timeIntervalSince(date)
-        if elapsed < 60 { return "Just now" }
+        if elapsed < 60 { return String(localized: "Just now") }
 
         let minutes = Int(elapsed / 60)
         if minutes < 60 { return "\(minutes)m ago" }
@@ -216,7 +216,7 @@ enum ReadingTimeFormatter {
         if hours < 24 { return "\(hours)h ago" }
 
         let days = Int(elapsed / 86_400)
-        if days == 1 { return "Yesterday" }
+        if days == 1 { return String(localized: "Yesterday") }
         if days < 7 { return "\(days)d ago" }
 
         let weeks = days / 7

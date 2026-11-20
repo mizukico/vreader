@@ -32,12 +32,12 @@ enum KeychainError: Error, LocalizedError, Sendable {
     var errorDescription: String? {
         switch self {
         case .dataEncodingFailed:
-            return "Failed to encode or decode Keychain data as UTF-8."
+            return String(localized: "Failed to encode or decode Keychain data as UTF-8.")
         case .unexpectedStatus(let status):
             let message = SecCopyErrorMessageString(status, nil) as String? ?? "Unknown"
             return "Keychain error (\(status)): \(message)"
         case .unexpectedResultType:
-            return "Keychain returned an unexpected result type."
+            return String(localized: "Keychain returned an unexpected result type.")
         }
     }
 }

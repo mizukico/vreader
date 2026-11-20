@@ -50,25 +50,25 @@ enum ImportError: Error, Equatable, Sendable {
             let displayExt = ext.isEmpty ? "unknown" : ext
             return "The file format \"\(displayExt)\" is not supported."
         case .binaryMasquerade:
-            return "This file appears to be a binary file, not a text document."
+            return String(localized: "This file appears to be a binary file, not a text document.")
         case .fileNotReadable:
             return "The file could not be read. It may be missing or inaccessible."
         case .hashComputationFailed:
-            return "Could not verify file integrity."
+            return String(localized: "Could not verify file integrity.")
         case .duplicateBook:
-            return "This book is already in your library."
+            return String(localized: "This book is already in your library.")
         case .sandboxCopyFailed:
-            return "Could not save the file to the library."
+            return String(localized: "Could not save the file to the library.")
         case .encodingDetectionFailed:
-            return "Could not detect the text file encoding."
+            return String(localized: "Could not detect the text file encoding.")
         case .cancelled:
-            return "Import was cancelled."
+            return String(localized: "Import was cancelled.")
         case .securityScopeAccessDenied:
-            return "Permission to access this file was denied."
+            return String(localized: "Permission to access this file was denied.")
         case .bookNotFound:
-            return "The book could not be found in the library."
+            return String(localized: "The book could not be found in the library.")
         case .persistenceFailed:
-            return "Could not save the book to the library."
+            return String(localized: "Could not save the book to the library.")
         }
     }
 

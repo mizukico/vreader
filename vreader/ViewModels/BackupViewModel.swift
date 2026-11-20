@@ -235,11 +235,11 @@ extension BackupError {
     /// User-visible explanation; never includes paths or stack details.
     var userMessage: String {
         switch self {
-        case .archiveCorrupted: return "The backup archive is corrupted."
-        case .archiveCreationFailed: return "Could not create the backup archive."
-        case .backupNotFound: return "Backup not found on the server."
+        case .archiveCorrupted: return String(localized: "The backup archive is corrupted.")
+        case .archiveCreationFailed: return String(localized: "Could not create the backup archive.")
+        case .backupNotFound: return String(localized: "Backup not found on the server.")
         case .storageUnavailable(let msg): return "Server unavailable. \(msg)"
-        case .cancelled: return "Cancelled."
+        case .cancelled: return String(localized: "Cancelled.")
         case .restorePartiallyFailed(let sections):
             return "These sections didn't restore: \(sections). Other sections were applied; try the restore again."
         }

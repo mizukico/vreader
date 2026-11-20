@@ -13,10 +13,10 @@ extension ChatContextScope {
     /// The one-line descriptor under the scope's name in the menu.
     var menuDescription: String {
         switch self {
-        case .section:   return "Just the passage you’re reading"
-        case .chapter:   return "The whole current chapter"
-        case .bookSoFar: return "Everything up to your page"
-        case .wholeBook: return "Reads the entire book on demand"
+        case .section:   return String(localized: "Just the passage you’re reading")
+        case .chapter:   return String(localized: "The whole current chapter")
+        case .bookSoFar: return String(localized: "Everything up to your page")
+        case .wholeBook: return String(localized: "Reads the entire book on demand")
         }
     }
 

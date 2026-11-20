@@ -12,10 +12,10 @@ enum LibrarySortOrder: String, Sendable, CaseIterable, Identifiable {
     /// Human-readable label for display in sort picker.
     var label: String {
         switch self {
-        case .title: return "Title"
-        case .addedAt: return "Date Added"
-        case .lastReadAt: return "Last Read"
-        case .totalReadingTime: return "Reading Time"
+        case .title: return String(localized: "Title")
+        case .addedAt: return String(localized: "Date Added")
+        case .lastReadAt: return String(localized: "Last Read")
+        case .totalReadingTime: return String(localized: "Reading Time")
         }
     }
 }

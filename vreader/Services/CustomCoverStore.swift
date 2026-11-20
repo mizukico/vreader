@@ -134,7 +134,7 @@ enum CustomCoverError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .encodingFailed:
-            return "Failed to encode image as JPEG."
+            return String(localized: "Failed to encode image as JPEG.")
         }
     }
 }

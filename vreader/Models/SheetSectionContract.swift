@@ -49,11 +49,11 @@ enum ReaderSheetKind: String, CaseIterable, Sendable {
     /// chrome title is `nil`.
     var designTitle: String? {
         switch self {
-        case .display:         return "Display"
+        case .display:         return String(localized: "Display")
         case .tableOfContents: return nil    // runtime: the book title
-        case .annotations:     return "Annotations"
+        case .annotations:     return String(localized: "Annotations")
         case .aiAssistant:     return nil    // custom sparkle header
-        case .appSettings:     return "Settings"
+        case .appSettings:     return String(localized: "Settings")
         }
     }
 

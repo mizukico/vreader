@@ -446,7 +446,7 @@ final class ChapterReTranslateViewModel {
             case .providerFailed(let message):
                 return "Translation failed: \(message)"
             case .cancelled:
-                return "Translation was cancelled."
+                return String(localized: "Translation was cancelled.")
             }
         }
         return "Translation failed: \(error.localizedDescription)"

@@ -237,12 +237,12 @@ final class EPUBReaderViewModel {
 
     private func describeParserError(_ error: EPUBParserError) -> String {
         switch error {
-        case .fileNotFound: return "The book file could not be found."
-        case .invalidFormat: return "This file is not a valid EPUB."
-        case .parsingFailed: return "The book could not be read."
-        case .notOpen: return "No book is currently open."
-        case .alreadyOpen: return "A book is already open."
-        case .resourceNotFound: return "A book resource could not be loaded."
+        case .fileNotFound: return String(localized: "The book file could not be found.")
+        case .invalidFormat: return String(localized: "This file is not a valid EPUB.")
+        case .parsingFailed: return String(localized: "The book could not be read.")
+        case .notOpen: return String(localized: "No book is currently open.")
+        case .alreadyOpen: return String(localized: "A book is already open.")
+        case .resourceNotFound: return String(localized: "A book resource could not be loaded.")
         }
     }
 }

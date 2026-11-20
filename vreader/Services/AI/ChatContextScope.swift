@@ -54,10 +54,10 @@ enum ChatContextScope: String, CaseIterable, Sendable, Equatable {
     /// The chip / menu label. Matches the design strings exactly.
     var displayName: String {
         switch self {
-        case .section:   return "Section"
-        case .chapter:   return "Chapter"
-        case .bookSoFar: return "Book so far"
-        case .wholeBook: return "Whole book"
+        case .section:   return String(localized: "Section")
+        case .chapter:   return String(localized: "Chapter")
+        case .bookSoFar: return String(localized: "Book so far")
+        case .wholeBook: return String(localized: "Whole book")
         }
     }
 

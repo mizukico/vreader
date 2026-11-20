@@ -50,11 +50,11 @@ enum AIError: Error, LocalizedError, Sendable, Equatable {
     var errorDescription: String? {
         switch self {
         case .featureDisabled:
-            return "AI features are currently disabled."
+            return String(localized: "AI features are currently disabled.")
         case .consentRequired:
-            return "Please grant consent to use AI features."
+            return String(localized: "Please grant consent to use AI features.")
         case .apiKeyMissing:
-            return "No API key configured. Add one in Settings."
+            return String(localized: "No API key configured. Add one in Settings.")
         case .providerError(let message):
             return "AI provider error: \(message)"
         case .networkError(let message):
@@ -63,15 +63,15 @@ enum AIError: Error, LocalizedError, Sendable, Equatable {
             if let seconds = retryAfter {
                 return "Rate limited. Try again in \(seconds) seconds."
             }
-            return "Rate limited. Please try again later."
+            return String(localized: "Rate limited. Please try again later.")
         case .contextExtractionFailed:
-            return "Could not extract text context for AI."
+            return String(localized: "Could not extract text context for AI.")
         case .invalidResponse:
-            return "Received an invalid response from the AI provider."
+            return String(localized: "Received an invalid response from the AI provider.")
         case .cacheMiss:
-            return "No cached response available."
+            return String(localized: "No cached response available.")
         case .toolUseUnsupported:
-            return "This AI provider does not support tool calling."
+            return String(localized: "This AI provider does not support tool calling.")
         }
     }
 }

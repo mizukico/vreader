@@ -51,9 +51,9 @@ enum ErrorMessageAuditor {
     private static func sanitizePersistence(_ error: PersistenceError) -> String {
         switch error {
         case .recordNotFound:
-            return "The requested item could not be found."
+            return String(localized: "The requested item could not be found.")
         case .invalidContent:
-            return "The content could not be processed."
+            return String(localized: "The content could not be processed.")
         case .partialBulkInsert(let insertedKeys, _):
             return "Some items were saved (\(insertedKeys.count)), but others could not be processed."
         }
@@ -67,21 +67,21 @@ enum ErrorMessageAuditor {
     private static func sanitizeAI(_ error: AIError) -> String {
         switch error {
         case .featureDisabled:
-            return "AI features are currently disabled."
+            return String(localized: "AI features are currently disabled.")
         case .consentRequired:
-            return "Please grant consent to use AI features."
+            return String(localized: "Please grant consent to use AI features.")
         case .apiKeyMissing:
-            return "No API key configured. Add one in Settings."
+            return String(localized: "No API key configured. Add one in Settings.")
         case .providerError:
-            return "The AI service encountered an error. Please try again."
+            return String(localized: "The AI service encountered an error. Please try again.")
         case .networkError:
             return "A network error occurred. Check your connection and try again."
         case .rateLimited:
-            return "Too many requests. Please try again later."
+            return String(localized: "Too many requests. Please try again later.")
         case .contextExtractionFailed:
-            return "Could not extract text context for AI."
+            return String(localized: "Could not extract text context for AI.")
         case .invalidResponse:
-            return "Received an invalid response from the AI provider."
+            return String(localized: "Received an invalid response from the AI provider.")
         case .cacheMiss:
             // Internal-only error; should not reach UI. Generic fallback.
             return genericMessage
@@ -95,30 +95,30 @@ enum ErrorMessageAuditor {
     private static func sanitizeSync(_ error: SyncError) -> String {
         switch error {
         case .syncDisabled:
-            return "Sync is currently disabled."
+            return String(localized: "Sync is currently disabled.")
         case .networkUnavailable:
             return "No network connection. Sync will resume when you're back online."
         case .authenticationFailed:
-            return "Could not sign in to sync. Please check your account."
+            return String(localized: "Could not sign in to sync. Please check your account.")
         case .quotaExceeded:
             return "Cloud storage quota exceeded. Free up space to continue syncing."
         case .checksumMismatch:
-            return "A file verification error occurred during sync."
+            return String(localized: "A file verification error occurred during sync.")
         case .mergeConflict:
-            return "A sync conflict occurred. Please try again."
+            return String(localized: "A sync conflict occurred. Please try again.")
         case .unknown:
-            return "A sync error occurred. Please try again."
+            return String(localized: "A sync error occurred. Please try again.")
         }
     }
 
     private static func sanitizeSearch(_ error: SearchIndexError) -> String {
         switch error {
         case .databaseOpenFailed:
-            return "Could not open the search index. Please restart the app."
+            return String(localized: "Could not open the search index. Please restart the app.")
         case .queryFailed:
-            return "The search query failed. Please try a different search."
+            return String(localized: "The search query failed. Please try a different search.")
         case .indexFailed:
-            return "Could not index content for search."
+            return String(localized: "Could not index content for search.")
         }
     }
 }

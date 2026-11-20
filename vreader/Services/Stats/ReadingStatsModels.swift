@@ -41,12 +41,12 @@ enum ReadingStatsWindow: String, CaseIterable, Identifiable, Sendable {
     /// Short label for the window-selector pill bar.
     var label: String {
         switch self {
-        case .today: return "Today"
+        case .today: return String(localized: "Today")
         case .last7Days: return "7d"
         case .last30Days: return "30d"
         case .last90Days: return "90d"
         case .last180Days: return "180d"
-        case .last365Days: return "Year"   // WI-6b: calendar-YTD label
+        case .last365Days: return String(localized: "Year")   // WI-6b: calendar-YTD label
         case .allTime: return "All"
         }
     }

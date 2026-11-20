@@ -195,7 +195,7 @@ final class ReaderLifecycleHelper {
         do {
             try sessionTracker.startSessionIfNeeded(bookFingerprint: bookFingerprint)
         } catch {
-            return "Failed to resume reading session."
+            return String(localized: "Failed to resume reading session.")
         }
         if alwaysResetSegment {
             segmentStartDate = Date()

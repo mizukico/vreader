@@ -840,11 +840,11 @@ final class TXTReaderViewModel {
 
     private func describeServiceError(_ error: TXTServiceError) -> String {
         switch error {
-        case .fileNotFound: return "The file could not be found."
-        case .encodingDetectionFailed: return "Could not detect file encoding."
-        case .decodingFailed: return "The file could not be decoded."
-        case .notOpen: return "No file is currently open."
-        case .alreadyOpen: return "A file is already open."
+        case .fileNotFound: return String(localized: "The file could not be found.")
+        case .encodingDetectionFailed: return String(localized: "Could not detect file encoding.")
+        case .decodingFailed: return String(localized: "The file could not be decoded.")
+        case .notOpen: return String(localized: "No file is currently open.")
+        case .alreadyOpen: return String(localized: "A file is already open.")
         }
     }
 }

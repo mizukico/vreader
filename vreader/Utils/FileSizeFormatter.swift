@@ -22,7 +22,7 @@ enum FileSizeFormatter {
     /// - 2_516_582 -> "2.4 MB"
     /// - 1_073_741_824 -> "1 GB"
     static func format(byteCount: Int64) -> String {
-        guard byteCount > 0 else { return "Zero KB" }
+        guard byteCount > 0 else { return String(localized: "Zero KB") }
 
         let formatter = ByteCountFormatter()
         formatter.countStyle = .file

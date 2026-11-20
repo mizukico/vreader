@@ -87,7 +87,7 @@ enum AccessibilityFormatters {
     static func accessibleFormatBadge(format: String) -> String {
         let badge = ReadingTimeFormatter.formatBadgeLabel(format: format)
         if badge.isEmpty {
-            return "Unknown format"
+            return String(localized: "Unknown format")
         }
         return "\(badge) format"
     }
@@ -128,12 +128,12 @@ enum AccessibilityFormatters {
     /// Returns a VoiceOver-friendly description of file download state.
     static func accessibleFileAvailability(state: FileAvailability) -> String {
         switch state {
-        case .metadataOnly: return "Available for download"
-        case .queuedDownload: return "Download queued"
-        case .downloading: return "Downloading"
-        case .available: return "Downloaded"
-        case .failed: return "Download failed"
-        case .stale: return "Update available"
+        case .metadataOnly: return String(localized: "Available for download")
+        case .queuedDownload: return String(localized: "Download queued")
+        case .downloading: return String(localized: "Downloading")
+        case .available: return String(localized: "Downloaded")
+        case .failed: return String(localized: "Download failed")
+        case .stale: return String(localized: "Update available")
         }
     }
 
@@ -142,11 +142,11 @@ enum AccessibilityFormatters {
     /// Returns a VoiceOver-friendly description of sync state.
     static func accessibleSyncStatus(_ status: SyncStatus) -> String {
         switch status {
-        case .disabled: return "Sync disabled"
-        case .idle: return "Synced"
-        case .syncing: return "Syncing in progress"
-        case .error: return "Sync error"
-        case .offline: return "Offline"
+        case .disabled: return String(localized: "Sync disabled")
+        case .idle: return String(localized: "Synced")
+        case .syncing: return String(localized: "Syncing in progress")
+        case .error: return String(localized: "Sync error")
+        case .offline: return String(localized: "Offline")
         }
     }
 }

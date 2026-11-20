@@ -222,13 +222,13 @@ final class SearchService: SearchProviding, @unchecked Sendable {
             if let seg = Int(segStr) {
                 return "Section \(seg + 1)" // Display as 1-indexed
             }
-            return "Section"
+            return String(localized: "Section")
         } else if sourceUnitId.hasPrefix("md:segment:") {
             let segStr = String(sourceUnitId.dropFirst("md:segment:".count))
             if let seg = Int(segStr) {
                 return "Section \(seg + 1)" // Display as 1-indexed
             }
-            return "Section"
+            return String(localized: "Section")
         }
         return ""
     }

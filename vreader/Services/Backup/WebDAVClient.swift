@@ -39,7 +39,7 @@ enum WebDAVError: LocalizedError, Sendable, Equatable {
     var errorDescription: String? {
         switch self {
         case .authenticationFailed:
-            return "Authentication failed — check the username and password."
+            return String(localized: "Authentication failed — check the username and password.")
         case .notFound(let path):
             return "Server returned 404 Not Found for: \(path)"
         case .connectionFailed(let detail):
@@ -49,7 +49,7 @@ enum WebDAVError: LocalizedError, Sendable, Equatable {
         case .httpError(let code):
             return "Server returned an unexpected HTTP status: \(code)."
         case .quotaExceeded:
-            return "WebDAV server is out of storage space."
+            return String(localized: "WebDAV server is out of storage space.")
         case .invalidResponse(let detail):
             return "WebDAV server returned an unreadable response. (\(detail))"
         }
