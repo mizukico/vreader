@@ -152,17 +152,9 @@ jobs:
           if [ -d "${LOC_SRC}" ]; then
             plutil -lint "${LOC_SRC}/Localizable.strings"
             cp -R "${LOC_SRC}" Payload/vreader.app/
-            python3 - <<'PY'
-import plistlib
-path = "Payload/vreader.app/Info.plist"
-with open(path, "rb") as fh:
-    info = plistlib.load(fh)
-info["CFBundleLocalizations"] = ["en", "zh-Hans"]
-with open(path, "wb") as fh:
-    plistlib.dump(info, fh)
-PY
+            python3 -c 'import plistlib; p="Payload/vreader.app/Info.plist"; d=plistlib.load(open(p,"rb")); d["CFBundleLocalizations"]=["en","zh-Hans"]; plistlib.dump(d,open(p,"wb"))'
             echo "injected: $(ls Payload/vreader.app/zh-Hans.lproj)"
-            python3 -c "print('zh-Hans keys:', open('Payload/vreader.app/zh-Hans.lproj/Localizable.strings', encoding='utf-8').read().count('\" = '))"
+            python3 -c 'p="Payload/vreader.app/zh-Hans.lproj/Localizable.strings"; n=open(p,encoding="utf-8").read().count(" = "); print("zh-Hans keys:", n)'
           else
             echo "::warning::Localization/zh-Hans.lproj is missing from the repo; shipping English only"
           fi
