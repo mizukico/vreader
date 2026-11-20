@@ -17,7 +17,15 @@ on:
       xcode:
         description: "Xcode version to use (e.g. 16.0, 16.4, 26.1); empty = runner default"
         type: string
-        default: "16.0"
+        default: "16.4"
+      swift_version:
+        description: "SWIFT_VERSION override. 5.0 downgrades Swift 6 language-mode concurrency errors to warnings; leave empty to use the project setting"
+        type: string
+        default: "5.0"
+      strict_concurrency:
+        description: "SWIFT_STRICT_CONCURRENCY override (minimal / targeted / complete); empty = project setting"
+        type: string
+        default: "minimal"
 
 permissions:
   contents: read
@@ -78,6 +86,22 @@ jobs:
           set -euo pipefail
           OUT="${RUNNER_TEMP}/out"
           mkdir -p "${OUT}"
+
+          # Optional overrides. The repo pins SWIFT_VERSION=6.0 with
+          # SWIFT_STRICT_CONCURRENCY=complete, and its sources contain
+          # Swift-6-language-mode isolation errors that only become warnings
+          # in Swift 5 mode (Readium 3.9 returns non-Sendable types, UIKit
+          # main-actor properties are touched from nonisolated helpers).
+          # These overrides change compile-time diagnostics only.
+          EXTRA=()
+          if [ -n "${{ inputs.swift_version }}" ]; then
+            EXTRA+=("SWIFT_VERSION=${{ inputs.swift_version }}")
+          fi
+          if [ -n "${{ inputs.strict_concurrency }}" ]; then
+            EXTRA+=("SWIFT_STRICT_CONCURRENCY=${{ inputs.strict_concurrency }}")
+          fi
+          echo "extra settings: ${EXTRA[*]:-<none>}"
+
           xcodebuild archive \
             -project "${PROJECT}" \
             -scheme "${SCHEME}" \
@@ -86,6 +110,7 @@ jobs:
             -archivePath "${OUT}/vreader.xcarchive" \
             -skipMacroValidation \
             -skipPackagePluginValidation \
+            "${EXTRA[@]}" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
