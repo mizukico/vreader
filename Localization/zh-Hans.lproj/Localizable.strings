@@ -142,6 +142,7 @@
 "Grant Consent" = "同意授权";
 "Grant consent in Settings to use AI features." = "请在设置中同意授权以使用 AI 功能。";
 "Group (optional)" = "分组（可选）";
+"HTTP TTS" = "HTTP TTS";
 "HTTP TTS Settings" = "HTTP TTS 设置";
 "HTTPS is recommended. HTTP is accepted for Tailscale and local-network WebDAV servers." = "建议使用 HTTPS。Tailscale 与局域网内的 WebDAV 服务器允许使用 HTTP。";
 "Help & Feedback" = "帮助与反馈";
@@ -187,6 +188,7 @@
 "No WebDAV Servers" = "无 WebDAV 服务器";
 "No backups yet" = "暂无备份";
 "No book is currently open." = "当前没有打开的书籍。";
+"No bookmarks yet" = "暂无书签";
 "No cached response available." = "没有可用的缓存响应。";
 "No collections yet" = "暂无合集";
 "No file is currently open." = "当前没有打开的文件。";
