@@ -146,7 +146,7 @@ struct BookDetailsSheet: View {
     // MARK: - Body
 
     var body: some View {
-        ReaderSheetChrome(theme: theme, title: "Book details", trailing: { shareButton }) {
+        ReaderSheetChrome(theme: theme, title: String(localized: "Book details"), trailing: { shareButton }) {
             ScrollView {
                 VStack(spacing: 22) {
                     header

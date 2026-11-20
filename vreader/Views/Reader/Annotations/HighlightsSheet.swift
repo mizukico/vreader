@@ -85,7 +85,7 @@ struct HighlightsSheet: View {
     var body: some View {
         ReaderSheetChrome(
             theme: theme,
-            title: "Annotations",
+            title: String(localized: "Annotations"),
             onClose: onDismiss,
             trailing: { exportButton }
         ) {
