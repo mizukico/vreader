@@ -26,6 +26,10 @@ on:
         description: "SWIFT_STRICT_CONCURRENCY override (minimal / targeted / complete); empty = project setting"
         type: string
         default: "minimal"
+      other_swift_flags:
+        description: "Extra OTHER_SWIFT_FLAGS appended after $(inherited); empty = project setting"
+        type: string
+        default: "-enable-upcoming-feature IsolatedDefaultValues"
 
 permissions:
   contents: read
@@ -99,6 +103,13 @@ jobs:
           fi
           if [ -n "${{ inputs.strict_concurrency }}" ]; then
             EXTRA+=("SWIFT_STRICT_CONCURRENCY=${{ inputs.strict_concurrency }}")
+          fi
+          # Swift 5 mode does not enable SE-0411 (isolated default value
+          # expressions) by default, but this project relies on it: several
+          # inits default a parameter to a @MainActor type. Enabling the
+          # upcoming feature keeps those sites compiling.
+          if [ -n "${{ inputs.other_swift_flags }}" ]; then
+            EXTRA+=("OTHER_SWIFT_FLAGS=\$(inherited) ${{ inputs.other_swift_flags }}")
           fi
           echo "extra settings: ${EXTRA[*]:-<none>}"
 
