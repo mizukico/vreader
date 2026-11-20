@@ -14,6 +14,10 @@ on:
           - Release
           - Debug
         default: Release
+      xcode:
+        description: "Xcode version to use (e.g. 16.0, 16.4, 26.1); empty = runner default"
+        type: string
+        default: "16.0"
 
 permissions:
   contents: read
@@ -39,11 +43,24 @@ jobs:
           set -euo pipefail
           echo "== installed Xcodes =="
           ls -1 /Applications | grep -i '^Xcode' || true
-          XC="$(ls -d /Applications/Xcode_16*.app 2>/dev/null | sort -V | tail -1 || true)"
-          if [ -n "${XC}" ]; then
+
+          WANT="${{ inputs.xcode }}"
+          if [ -n "${WANT}" ]; then
+            XC="/Applications/Xcode_${WANT}.app"
+            if [ ! -d "${XC}" ]; then
+              # tolerate "16.0" matching "16.0.0", and so on
+              XC="$(ls -d /Applications/Xcode_${WANT}*.app 2>/dev/null | sort -V | head -1 || true)"
+            fi
+            if [ -z "${XC}" ] || [ ! -d "${XC}" ]; then
+              echo "::error::requested Xcode ${WANT} is not installed on this runner"
+              exit 1
+            fi
             echo "Selecting ${XC}"
             sudo xcode-select -s "${XC}"
+          else
+            echo "Keeping the runner default Xcode"
           fi
+
           echo "== active toolchain =="
           xcode-select -p
           xcodebuild -version
