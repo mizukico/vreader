@@ -55,6 +55,7 @@
 
 import SwiftUI
 import SwiftData
+import Foundation
 
 /// App settings screen presented as a sheet (feature #60 WI-10 re-skin,
 /// feature #67 WI-4 profile card + row restyle).
@@ -226,7 +227,7 @@ struct SettingsView: View {
                     theme: theme,
                     icon: Image(systemName: SettingsRowPalette.webDAVBackup.symbolName),
                     iconBackground: SettingsRowPalette.webDAVBackup.background.color,
-                    title: "WebDAV Backup",
+                    title: String(localized: "WebDAV Backup"),
                     showsChevron: false
                 )
             }
@@ -239,7 +240,7 @@ struct SettingsView: View {
                     theme: theme,
                     icon: Image(systemName: SettingsRowPalette.bookSources.symbolName),
                     iconBackground: SettingsRowPalette.bookSources.background.color,
-                    title: "Book Sources",
+                    title: String(localized: "Book Sources"),
                     showsChevron: false
                 )
             }
@@ -269,7 +270,7 @@ struct SettingsView: View {
                     theme: theme,
                     icon: Image(systemName: SettingsRowPalette.replacementRules.symbolName),
                     iconBackground: SettingsRowPalette.replacementRules.background.color,
-                    title: "Replacement Rules",
+                    title: String(localized: "Replacement Rules"),
                     showsChevron: false
                 )
             }
@@ -282,7 +283,7 @@ struct SettingsView: View {
                     theme: theme,
                     icon: Image(systemName: SettingsRowPalette.httpTTS.symbolName),
                     iconBackground: SettingsRowPalette.httpTTS.background.color,
-                    title: "HTTP TTS",
+                    title: String(localized: "HTTP TTS"),
                     showsChevron: false
                 )
             }
@@ -313,8 +314,8 @@ struct SettingsView: View {
                     theme: theme,
                     icon: Image(systemName: SettingsRowPalette.diagnostics.symbolName),
                     iconBackground: SettingsRowPalette.diagnostics.background.color,
-                    title: "Diagnostics",
-                    detail: "View and export app logs",
+                    title: String(localized: "Diagnostics"),
+                    detail: String(localized: "View and export app logs"),
                     showsChevron: false
                 )
             }
@@ -324,7 +325,7 @@ struct SettingsView: View {
                 theme: theme,
                 icon: Image(systemName: SettingsRowPalette.helpFeedback.symbolName),
                 iconBackground: SettingsRowPalette.helpFeedback.background.color,
-                title: "Help & Feedback",
+                title: String(localized: "Help & Feedback"),
                 showsChevron: false
             )
             .accessibilityIdentifier("settingsHelpFeedback")
@@ -333,7 +334,7 @@ struct SettingsView: View {
                 theme: theme,
                 icon: Image(systemName: SettingsRowPalette.version.symbolName),
                 iconBackground: SettingsRowPalette.version.background.color,
-                title: "Version",
+                title: String(localized: "Version"),
                 trailingValue: Self.appVersion,
                 showsChevron: false
             )

@@ -29,6 +29,7 @@
 
 import SwiftUI
 import SwiftData
+import Foundation
 
 /// The navigation annotations sheet — Contents + Bookmarks.
 struct TOCSheet: View {
@@ -284,7 +285,7 @@ struct TOCSheet: View {
                 theme: theme,
                 accessibilityIdentifier: "bookmarkEmptyState",
                 art: AnyView(EmptyBookmarkArt(theme: theme)),
-                title: "No bookmarks yet",
+                title: String(localized: "No bookmarks yet"),
                 body: "Tap the bookmark icon in the top bar to save your place. Bookmarks let you jump back instantly."
             )
         } else {

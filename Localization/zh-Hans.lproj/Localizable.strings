@@ -34,6 +34,7 @@
 "Add what you’ve marked to the context" = "把你标注的内容加入上下文";
 "All Books" = "全部书籍";
 "All books" = "全部书籍";
+"Allow AI data sharing" = "允许共享 AI 数据";
 "Allow data sharing" = "允许共享数据";
 "Already translated — switching back is instant" = "已翻译 — 切回可立即完成";
 "Annotations" = "批注";
@@ -120,6 +121,7 @@
 "EN" = "EN";
 "Edit" = "编辑";
 "Edit Annotation" = "编辑批注";
+"Enable AI Assistant" = "启用 AI 助手";
 "Enabled" = "已启用";
 "Endpoint" = "端点";
 "Enter API Key" = "输入 API 密钥";
@@ -142,6 +144,7 @@
 "Group (optional)" = "分组（可选）";
 "HTTP TTS Settings" = "HTTP TTS 设置";
 "HTTPS is recommended. HTTP is accepted for Tailscale and local-network WebDAV servers." = "建议使用 HTTPS。Tailscale 与局域网内的 WebDAV 服务器允许使用 HTTP。";
+"Help & Feedback" = "帮助与反馈";
 "Hide" = "隐藏";
 "Highlight" = "高亮";
 "How much of the book the assistant reads" = "助手可读取的书籍范围";
@@ -190,6 +193,7 @@
 "No past conversations" = "无历史对话";
 "No providers — add one in Settings" = "无服务商 — 请在设置中添加";
 "No results found" = "未找到结果";
+"No table of contents" = "暂无目录";
 "Not now" = "暂不";
 "OK" = "好";
 "ON-DEMAND" = "按需";
@@ -254,6 +258,7 @@
 "See all" = "查看全部";
 "Select All" = "全选";
 "Select an action to get AI assistance." = "选择一个操作以获得 AI 协助。";
+"Send passages and chat history for better answers" = "发送段落与对话记录以获得更好的回答";
 "Sentence mode isn’t available for this book’s format yet." = "本书格式尚不支持句级模式。";
 "Series" = "系列";
 "Server URL" = "服务器 URL";
@@ -322,6 +327,7 @@
 "Translation unavailable offline" = "离线状态下无法翻译";
 "Translation uses your configured AI provider. Long summaries may take a few seconds." = "翻译使用你配置的 AI 服务商。较长的摘要可能需要几秒钟。";
 "Translation was cancelled." = "翻译已取消。";
+"Translation, summarize, ask about the text" = "翻译、摘要、就正文提问";
 "Try Again" = "重试";
 "Try a different spelling or a partial word." = "试试其他拼写或部分词语。";
 "Type" = "类型";
@@ -337,6 +343,8 @@
 "Use {{TEXT}} and {{VOICE}} as placeholders." = "使用 {{TEXT}} 和 {{VOICE}} 作为占位符。";
 "Username" = "用户名";
 "Validate & Save" = "校验并保存";
+"Version" = "版本";
+"View and export app logs" = "查看并导出应用日志";
 "Voice ID" = "声音 ID";
 "WebDAV Backup" = "WebDAV 备份";
 "WebDAV Servers" = "WebDAV 服务器";

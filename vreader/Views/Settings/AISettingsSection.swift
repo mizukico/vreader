@@ -45,6 +45,7 @@
 //   `dev-docs/designs/vreader-fidelity-v1/project/vreader-ai-toggles.jsx`
 
 import SwiftUI
+import Foundation
 
 /// Form section containing AI assistant settings.
 struct AISettingsSection: View {
@@ -64,8 +65,8 @@ struct AISettingsSection: View {
                 theme: theme,
                 icon: Image(systemName: SettingsRowPalette.aiAssistant.symbolName),
                 iconBackground: SettingsRowPalette.aiAssistant.background.color,
-                title: "Enable AI Assistant",
-                detail: "Translation, summarize, ask about the text",
+                title: String(localized: "Enable AI Assistant"),
+                detail: String(localized: "Translation, summarize, ask about the text"),
                 isOn: $viewModel.isAIEnabled,
                 toggleAccessibilityIdentifier: "aiToggle"
             )
@@ -82,8 +83,8 @@ struct AISettingsSection: View {
                     theme: theme,
                     icon: Image(systemName: SettingsRowPalette.aiDataSharing.symbolName),
                     iconBackground: SettingsRowPalette.aiDataSharing.background.color,
-                    title: "Allow AI data sharing",
-                    detail: "Send passages and chat history for better answers",
+                    title: String(localized: "Allow AI data sharing"),
+                    detail: String(localized: "Send passages and chat history for better answers"),
                     isOn: $viewModel.hasConsent,
                     toggleAccessibilityIdentifier: "consentToggle"
                 )
@@ -104,7 +105,7 @@ struct AISettingsSection: View {
         AISettingsProviderRow(
             theme: theme,
             spec: SettingsRowPalette.aiProvider,
-            title: "AI Providers",
+            title: String(localized: "AI Providers"),
             trailingValue: activeProfileSummary
         )
     }
