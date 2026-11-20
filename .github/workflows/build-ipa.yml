@@ -145,6 +145,28 @@ jobs:
           mkdir -p Payload
           cp -R "${APP}" Payload/
 
+          # Simplified Chinese localization, applied as a bundle overlay so the
+          # Xcode target stays identical to upstream. iOS resolves
+          # Payload/vreader.app/zh-Hans.lproj like any Xcode-written localization.
+          LOC_SRC="${GITHUB_WORKSPACE}/Localization/zh-Hans.lproj"
+          if [ -d "${LOC_SRC}" ]; then
+            plutil -lint "${LOC_SRC}/Localizable.strings"
+            cp -R "${LOC_SRC}" Payload/vreader.app/
+            python3 - <<'PY'
+import plistlib
+path = "Payload/vreader.app/Info.plist"
+with open(path, "rb") as fh:
+    info = plistlib.load(fh)
+info["CFBundleLocalizations"] = ["en", "zh-Hans"]
+with open(path, "wb") as fh:
+    plistlib.dump(info, fh)
+PY
+            echo "injected: $(ls Payload/vreader.app/zh-Hans.lproj)"
+            python3 -c "print('zh-Hans keys:', open('Payload/vreader.app/zh-Hans.lproj/Localizable.strings', encoding='utf-8').read().count('\" = '))"
+          else
+            echo "::warning::Localization/zh-Hans.lproj is missing from the repo; shipping English only"
+          fi
+
           IPA="vreader-${{ inputs.configuration }}-unsigned.ipa"
           zip -qry "${IPA}" Payload
 
